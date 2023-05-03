@@ -8,7 +8,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { Product } from "../../product";
+import { Product } from "../../app/models/product";
 
 interface Props {
   product: Product;
