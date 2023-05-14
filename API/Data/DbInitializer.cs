@@ -15,7 +15,7 @@ public static class DbInitializer
                 Name = "Apple iPhone 13 Pro",
                 Description =
                 "The Apple iPhone 13 Pro is the latest flagship smartphone from Apple, featuring a 6.1-inch Super Retina XDR display and A15 Bionic chip.",
-                Price = 129900,
+                Price = 1299,
                 PictureUrl =
                 "https://www.apple.com/tr/shop/buy-iphone/iphone-13/iphone-13-pro-siyah-128gb#gallery-image-1",
                 Type = "Smartphone",
@@ -27,7 +27,7 @@ public static class DbInitializer
                 Name = "Samsung Galaxy S21 Ultra",
                 Description =
                 "The Samsung Galaxy S21 Ultra is a powerful smartphone with a 6.8-inch Dynamic AMOLED display and a quad-camera system featuring a 108MP primary sensor.",
-                Price = 119900,
+                Price = 1199,
                 PictureUrl =
                  "https://images.samsung.com/is/image/samsung/tr-galaxy-s21-ultra-5g-g988-sm-g998bzkgtur-frontphantomblack-368021284?7205​76P​NG",
                 Type = "Smartphone",
@@ -39,7 +39,7 @@ public static class DbInitializer
                 Name = "Dell XPS 13",
                 Description =
                 "The Dell XPS 13 is a premium ultrabook with a 13.4-inch InfinityEdge display and 11th Gen Intel Core processors.",
-                Price = 129900,
+                Price = 1299,
                 PictureUrl =
                 "https://i.dell.com/is/image/DellContent//content/dam/global-site-design/product_images/dell_client_products/notebooks/xps_notebooks/13_9310/global_spi/notebook-xps-13-9310-laptop-silver-hero-504x350.psd?fmt=jpg&wid=570&hei=400",
                 Type = "Laptop",
@@ -51,7 +51,7 @@ public static class DbInitializer
                 Name = "Apple MacBook Pro",
                 Description =
                 "The Apple MacBook Pro is a powerful laptop with a 16-inch Retina display and 10th Gen Intel Core processors.",
-                Price = 239900,
+                Price = 2399,
                 PictureUrl = "https://www.apple.com/tr/shop/buy-mac/macbook-pro/14-in%C3%A7-macbook-pro-m1-pro-%C3%A7ip-8-%C3%A7ekirdekli-cpu-ve-14-%C3%A7ekirdekli-gpu-512gb#gallery-image-1",
                 Type = "Laptop",
                 Brand = "Apple",
@@ -62,7 +62,7 @@ public static class DbInitializer
                 Name = "Sony WH-1000XM4",
                 Description =
                 "The Sony WH-1000XM4 is a high-end pair of noise-cancelling headphones with exceptional sound quality.",
-                Price = 34900,
+                Price = 349,
                 PictureUrl =
                 "https://www.sony.com.tr/image/9a6c9f2b8f6c4a2d8a2f5b6e9c9f9b0e?fmt=pjpeg&bgcolor=FFFFFF&bgc=FFFFFF&wid=2515&hei=1320",
                 Brand = "Sony",
