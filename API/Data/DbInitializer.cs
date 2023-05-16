@@ -1,11 +1,34 @@
 ﻿using API.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Data;
 
 public static class DbInitializer
 {
-    public static void Initialize(StoreContext context)
+    public static async Task Initialize(StoreContext context, UserManager<User> userManager)
     {
+        if (!userManager.Users.Any())
+        {
+            var user = new User
+            {
+                UserName = "bob",
+                Email = "bob@test.com"
+            };
+
+            await userManager.CreateAsync(user, "Pa$$w0rd");
+            await userManager.AddToRoleAsync(user, "Member");
+
+            var admin = new User
+            {
+                UserName = "admin",
+                Email = "admin@test.com"
+            };
+
+            await userManager.CreateAsync(admin, "Pa$$w0rd");
+            await userManager.AddToRolesAsync(admin, new[] { "Member", "Admin" });
+        }
+
+
         if (context.Products.Any()) return;
 
         var products = new List<Product>
@@ -29,7 +52,7 @@ public static class DbInitializer
                 "The Samsung Galaxy S21 Ultra is a powerful smartphone with a 6.8-inch Dynamic AMOLED display and a quad-camera system featuring a 108MP primary sensor.",
                 Price = 1199,
                 PictureUrl =
-                 "https://images.samsung.com/is/image/samsung/tr-galaxy-s21-ultra-5g-g988-sm-g998bzkgtur-frontphantomblack-368021284?7205​76P​NG",
+                "https://images.samsung.com/is/image/samsung/tr-galaxy-s21-ultra-5g-g988-sm-g998bzkgtur-frontphantomblack-368021284?7205​76P​NG",
                 Type = "Smartphone",
                 Brand = "Samsung",
                 QuantityInStock = 30
@@ -52,7 +75,8 @@ public static class DbInitializer
                 Description =
                 "The Apple MacBook Pro is a powerful laptop with a 16-inch Retina display and 10th Gen Intel Core processors.",
                 Price = 2399,
-                PictureUrl = "https://www.apple.com/tr/shop/buy-mac/macbook-pro/14-in%C3%A7-macbook-pro-m1-pro-%C3%A7ip-8-%C3%A7ekirdekli-cpu-ve-14-%C3%A7ekirdekli-gpu-512gb#gallery-image-1",
+                PictureUrl =
+                "https://www.apple.com/tr/shop/buy-mac/macbook-pro/14-in%C3%A7-macbook-pro-m1-pro-%C3%A7ip-8-%C3%A7ekirdekli-cpu-ve-14-%C3%A7ekirdekli-gpu-512gb#gallery-image-1",
                 Type = "Laptop",
                 Brand = "Apple",
                 QuantityInStock = 10
