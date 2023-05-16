@@ -14,11 +14,11 @@ export default function ProductList(props: Props) {
   return (
     <Grid container spacing={4}>
       {props.products.map((product) => (
-        <Grid item xs={4} key={product.id}>
+        <Grid item xs={4}>
           {!productsLoaded ? (
             <ProductCardSkeleton />
           ) : (
-            <ProductCard product={product} />
+            <ProductCard key={product.id} product={product} />
           )}
         </Grid>
       ))}
