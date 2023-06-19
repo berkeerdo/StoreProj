@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -35,14 +36,10 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
 
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            jwtSecurityScheme, Array.Empty<string>()
-        }
-    });
+    c.AddSecurityRequirement(
+    new OpenApiSecurityRequirement { { jwtSecurityScheme, Array.Empty<string>() } }
+    );
 });
-
 
 builder.Services.AddDbContext<StoreContext>(opt =>
 {
@@ -51,11 +48,13 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 
 builder.Services.AddCors();
 
-builder.Services.AddIdentityCore<User>(opt => { opt.User.RequireUniqueEmail = true; })
+builder.Services
+.AddIdentityCore<User>(opt => { opt.User.RequireUniqueEmail = true; })
 .AddRoles<Role>()
 .AddEntityFrameworkStores<StoreContext>();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services
+.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(opt =>
 {
     opt.TokenValidationParameters = new TokenValidationParameters
@@ -64,8 +63,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         ValidateAudience = false,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
-        (builder.Configuration["JWTSettings:TokenKey"] ?? string.Empty))
+        IssuerSigningKey = new SymmetricSecurityKey(
+        Encoding.UTF8.GetBytes(
+        builder.Configuration["JWTSettings:TokenKey"] ?? string.Empty
+        )
+        )
     };
 });
 
@@ -85,7 +87,14 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseCors(opt => { opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000"); });
+app.UseSwagger();
+app.UseSwaggerUI(c => { c.ConfigObject.AdditionalItems.Add("persistAuthorization", "true"); });
+
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
+    .WithOrigins("http://localhost:3000", "http://boslukholding.com.tr");
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
