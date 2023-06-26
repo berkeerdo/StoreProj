@@ -1,4 +1,6 @@
-﻿namespace API.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API.Entities;
 
 public class Product
 {
@@ -9,5 +11,6 @@ public class Product
     public string PictureUrl { get; set; }
     public string Type { get; set; }
     public string Brand { get; set; }
+    [Range(1, int.MaxValue, ErrorMessage = "Quantity in stock must be greater than zero")]
     public int QuantityInStock { get; set; }
 }

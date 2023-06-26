@@ -9,27 +9,19 @@ public static class DbInitializer
     {
         if (!userManager.Users.Any())
         {
-            var user = new User
-            {
-                UserName = "bob",
-                Email = "bob@test.com"
-            };
+            var user = new User { UserName = "bob", Email = "bob@test.com" };
 
             await userManager.CreateAsync(user, "Pa$$w0rd");
             await userManager.AddToRoleAsync(user, "Member");
 
-            var admin = new User
-            {
-                UserName = "admin",
-                Email = "admin@test.com"
-            };
+            var admin = new User { UserName = "admin", Email = "admin@test.com" };
 
             await userManager.CreateAsync(admin, "Pa$$w0rd");
             await userManager.AddToRolesAsync(admin, new[] { "Member", "Admin" });
         }
 
-
-        if (context.Products.Any()) return;
+        if (context.Products.Any())
+            return;
 
         var products = new List<Product>
         {
@@ -37,11 +29,11 @@ public static class DbInitializer
             {
                 Name = "Apple iPhone 13 Pro",
                 Description =
-                "The Apple iPhone 13 Pro is the latest flagship smartphone from Apple, featuring a 6.1-inch Super Retina XDR display and A15 Bionic chip.",
-                Price = 1299,
+                    "Apple iPhone 13 Pro, 6.1 inçlik Super Retina XDR ekran ve A15 Bionic çip içeren Apple'ın en son amiral gemisi akıllı telefonudur.",
+                Price = 46599,
                 PictureUrl =
-                "https://www.apple.com/tr/shop/buy-iphone/iphone-13/iphone-13-pro-siyah-128gb#gallery-image-1",
-                Type = "Smartphone",
+                    "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-family-hero?wid=940&hei=1112&fmt=png-alpha&.v=1631652954000",
+                Type = "Akıllı Telefon",
                 Brand = "Apple",
                 QuantityInStock = 50
             },
@@ -49,11 +41,11 @@ public static class DbInitializer
             {
                 Name = "Samsung Galaxy S21 Ultra",
                 Description =
-                "The Samsung Galaxy S21 Ultra is a powerful smartphone with a 6.8-inch Dynamic AMOLED display and a quad-camera system featuring a 108MP primary sensor.",
-                Price = 1199,
+                    "Samsung Galaxy S21 Ultra, 6.8 inçlik Dinamik AMOLED ekran ve 108MP ana sensöre sahip dörtlü kamera sistemi ile güçlü bir akıllı telefondur.",
+                Price = 19999,
                 PictureUrl =
-                "https://images.samsung.com/is/image/samsung/tr-galaxy-s21-ultra-5g-g988-sm-g998bzkgtur-frontphantomblack-368021284?7205​76P​NG",
-                Type = "Smartphone",
+                    "https://productimages.hepsiburada.net/s/54/550/11185810898994.jpg/format:webp",
+                Type = "Akıllı Telefon",
                 Brand = "Samsung",
                 QuantityInStock = 30
             },
@@ -61,11 +53,11 @@ public static class DbInitializer
             {
                 Name = "Dell XPS 13",
                 Description =
-                "The Dell XPS 13 is a premium ultrabook with a 13.4-inch InfinityEdge display and 11th Gen Intel Core processors.",
-                Price = 1299,
+                    "Dell XPS 13, 13.4 inçlik InfinityEdge ekran ve 11. Nesil Intel Core işlemcilerle donatılmış premium bir ultrabook'tur.",
+                Price = 35998,
                 PictureUrl =
-                "https://i.dell.com/is/image/DellContent//content/dam/global-site-design/product_images/dell_client_products/notebooks/xps_notebooks/13_9310/global_spi/notebook-xps-13-9310-laptop-silver-hero-504x350.psd?fmt=jpg&wid=570&hei=400",
-                Type = "Laptop",
+                    "https://www.singular.com.cy/images/detailed/358/6c0baeac-c11a-4510-9e39-cc358110a599.jpg",
+                Type = "Dizüstü Bilgisayar",
                 Brand = "Dell",
                 QuantityInStock = 20
             },
@@ -73,11 +65,11 @@ public static class DbInitializer
             {
                 Name = "Apple MacBook Pro",
                 Description =
-                "The Apple MacBook Pro is a powerful laptop with a 16-inch Retina display and 10th Gen Intel Core processors.",
-                Price = 2399,
+                    "Apple MacBook Pro, 16 inçlik Retina ekran ve 10. Nesil Intel Core işlemcilerle güçlü bir dizüstü bilgisayardır.",
+                Price = 34999,
                 PictureUrl =
-                "https://www.apple.com/tr/shop/buy-mac/macbook-pro/14-in%C3%A7-macbook-pro-m1-pro-%C3%A7ip-8-%C3%A7ekirdekli-cpu-ve-14-%C3%A7ekirdekli-gpu-512gb#gallery-image-1",
-                Type = "Laptop",
+                    "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp14-spacegray-gallery1-202301?wid=2000&hei=1536&fmt=jpeg&qlt=95&.v=1670621031697",
+                Type = "Dizüstü Bilgisayar",
                 Brand = "Apple",
                 QuantityInStock = 10
             },
@@ -85,45 +77,45 @@ public static class DbInitializer
             {
                 Name = "Sony WH-1000XM4",
                 Description =
-                "The Sony WH-1000XM4 is a high-end pair of noise-cancelling headphones with exceptional sound quality.",
-                Price = 349,
+                    "Sony WH-1000XM4, olağanüstü ses kalitesine sahip yüksek kaliteli gürültü engelleme özelliklerine sahip üst düzey bir kulaklıktır.",
+                Price = 7999,
                 PictureUrl =
-                "https://www.sony.com.tr/image/9a6c9f2b8f6c4a2d8a2f5b6e9c9f9b0e?fmt=pjpeg&bgcolor=FFFFFF&bgc=FFFFFF&wid=2515&hei=1320",
+                    "https://www.sony.com.tr/image/5d02da5df552836db894cead8a68f5f3?fmt=pjpeg&bgcolor=FFFFFF&bgc=FFFFFF&wid=2515&hei=1320",
+                Type = "Kulaklık",
                 Brand = "Sony",
-                Type = "Headphones",
                 QuantityInStock = 40
             },
             new Product
             {
                 Name = "HP Spectre x360",
                 Description =
-                "The HP Spectre x360 is a versatile 2-in-1 laptop with a 14-inch OLED display and 11th Gen Intel Core processors.",
-                Price = 1399,
+                    "HP Spectre x360, 14 inçlik OLED ekran ve 11. Nesil Intel Core işlemcilerle çok yönlü bir 2'si 1 arada dizüstü bilgisayardır.",
+                Price = 43999,
                 PictureUrl =
-                "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c06624581.png",
-                Type = "Laptop",
+                    "https://www.hp.com/ch-de/shop/Html/Merch/Images/c08277622_1750x1285.jpg",
+                Type = "Dizüstü Bilgisayar",
                 Brand = "HP",
                 QuantityInStock = 15
             },
             new Product
             {
-                Name = "Google Pixel 6 Pro",
+                Name = "Xiaomi Redmi Pad",
                 Description =
-                "The Google Pixel 6 Pro is a high-end Android smartphone with a 6.7-inch OLED display and Google's custom Tensor chip.",
-                Price = 1099,
-                PictureUrl = "https://store.google.com/product/pixel_6_pro?hl=tr#gallery-image-1",
-                Type = "Smartphone",
-                Brand = "Google",
-                QuantityInStock = 25
+                    "Xiaomi Redmi Pad, 10.1 inçlik IPS LCD ekran ve MediaTek'in Dimensity 1200 çipiyle donatılmış üst seviye bir Android tablettir.",
+                Price = 9998,
+                PictureUrl =
+                    "https://productimages.hepsiburada.net/s/126/550/110000076497632.jpg/format:webp",
+                Type = "Tablet",
+                Brand = "Xiaomi",
+                QuantityInStock = 20
             },
             new Product
             {
                 Name = "Samsung Galaxy Tab S7+",
                 Description =
-                "The Samsung Galaxy Tab S7+ is a powerful Android tablet with a 12.4-inch Super AMOLED display and a Snapdragon 865+ processor.",
-                Price = 849,
-                PictureUrl =
-                "https://images.samsung.com/is/image/samsung/tr-galaxy-tab-s7-plus-t970-sm-t970nzkatur-frontmysticblack-thumb-368021282?$PD_GALLERY_L_JPG",
+                    "Samsung Galaxy Tab S7+, 12.4 inçlik Süper AMOLED ekran ve Snapdragon 865+ işlemciye sahip güçlü bir Android tabletidir.",
+                Price = 7840,
+                PictureUrl = "https://m.media-amazon.com/images/I/61GR9AZQ7EL.jpg",
                 Type = "Tablet",
                 Brand = "Samsung",
                 QuantityInStock = 10
@@ -132,11 +124,11 @@ public static class DbInitializer
             {
                 Name = "Sony PlayStation 5",
                 Description =
-                "The Sony PlayStation 5 is the latest generation of Sony's popular video game console, featuring an AMD Zen 2 processor and a custom RDNA 2 GPU.",
-                Price = 499,
+                    "Sony PlayStation 5, AMD Zen 2 işlemci ve özel RDNA 2 GPU içeren Sony'nin popüler video oyun konsolunun son neslidir.",
+                Price = 20299,
                 PictureUrl =
-                "https://www.sony.com.tr/image/4a4d4e9a2f8c4b0b8c2f5b6e9c9f9b0e?fmt=pjpeg&bgcolor=FFFFFF&bgc=FFFFFF&wid=2515&hei=1320",
-                Type = "Gaming Console",
+                    "https://sharafstore.com/web/image/product.template/1344/image_1024?unique=80f9e41",
+                Type = "Oyun Konsolu",
                 Brand = "Sony",
                 QuantityInStock = 5
             },
@@ -144,11 +136,10 @@ public static class DbInitializer
             {
                 Name = "Nintendo Switch OLED Model",
                 Description =
-                "The Nintendo Switch OLED Model is a new version of Nintendo's popular hybrid console with a 7-inch OLED display and enhanced audio features.",
-                Price = 349,
-                PictureUrl =
-                "https://www.nintendo.com.tr/content/dam/noa/en_US/hardware/switch/nintendo-switch-oled-model/nintendo-switch-oled-model-white-set/gallery/bundle/nintendo-switch-oled-model-white-set-gallery-01.jpg",
-                Type = "Gaming Console",
+                    "Nintendo Switch OLED Model, 7 inçlik OLED ekran ve gelişmiş ses özelliklerine sahip Nintendo'nun popüler hibrit konsolünün yeni bir versiyonudur.",
+                Price = 12999,
+                PictureUrl = "https://m.media-amazon.com/images/I/61E4b5drxzS.jpg",
+                Type = "Oyun Konsolu",
                 Brand = "Nintendo",
                 QuantityInStock = 8
             },
@@ -156,46 +147,47 @@ public static class DbInitializer
             {
                 Name = "Microsoft Surface Pro 7",
                 Description =
-                "The Microsoft Surface Pro 7 is a versatile 2-in-1 tablet with a 12.3-inch PixelSense display and 10th Gen Intel Core processors.",
-                Price = 749,
+                    "Microsoft Surface Pro 7, 12.3 inçlik PixelSense ekran ve 10. Nesil Intel Core işlemcilerle çok yönlü bir 2'si 1 arada tablettir.",
+                Price = 57502,
                 PictureUrl =
-                "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4sYmY?ver=c3d1&q=90&m=6&h=270&w=270&b=%23FFFFFFFF&l=f&o=t&aim=true",
+                    "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/MSFT-RWGaM8-Surface-Pro-7-in-Laptop-Mode?scl=1",
                 Type = "Tablet",
                 Brand = "Microsoft",
                 QuantityInStock = 20
             },
             new Product
             {
-                Name = "LG UltraFine 5K Display",
+                Name = "Asus VG248QG",
                 Description =
-                "The LG UltraFine 5K Display is a high-quality 27-inch monitor with a resolution of 5120x2880 pixels and Thunderbolt 3 connectivity.",
-                Price = 1299,
-                PictureUrl = "https://www.lg.com/us/images/monitors/md05988112/gallery/desktop-01.jpg",
-                Type = "Monitor",
-                Brand = "LG",
-                QuantityInStock = 7
+                    "Asus VG248QG, 1920x1080 piksel çözünürlüğe sahip yüksek performanslı 24 inçlik bir monitördür ve 165 Hz yenileme hızı, 0.5 ms tepki süresi ve FreeSync/G-Sync desteği sunar.",
+                Price = 4749,
+                PictureUrl =
+                    "https://images.hepsiburada.net/assets/Bilgisayar/ProductDesc/VG248QG-P_setting_000_1_90_end_500_221104.png",
+                Type = "Monitör",
+                Brand = "Asus",
+                QuantityInStock = 15
             },
             new Product
             {
-                Name = "Dell XPS 13",
+                Name = "Asus Zenbook 14 OLED UX3402ZA",
                 Description =
-                "The Dell XPS 13 is a powerful and compact laptop with a 13.4-inch display and 11th Gen Intel Core processors.",
-                Price = 1199,
+                    "Asus Zenbook 14 OLED UX3402ZA, 14 inçlik OLED ekrana ve 12. Nesil Intel Core işlemcilere sahip güçlü ve kompakt bir dizüstü bilgisayardır.",
+                Price = 20999,
                 PictureUrl =
-                "https://i.dell.com/is/image/DellContent//content/dam/global-site-design/product_images/dell_client_products/notebooks/xps_notebooks/13_9310/global_spi/notebook-xps-13-9310-laptop-silver-hero-504x350.psd?fmt=jpg&wid=570&hei=400",
-                Type = "Laptop",
-                Brand = "Dell",
-                QuantityInStock = 12
+                    "https://dlcdnwebimgs.asus.com/gain/7587b7be-cc5d-405d-8882-4b89ae85ba97/w800",
+                Type = "Dizüstü Bilgisayar",
+                Brand = "Asus",
+                QuantityInStock = 10
             },
             new Product
             {
                 Name = "Apple Watch Series 7",
                 Description =
-                "The Apple Watch Series 7 is the latest version of Apple's popular smartwatch, featuring a larger Retina display and faster charging.",
-                Price = 399,
+                    "Apple Watch Series 7, daha büyük bir Retina ekran ve daha hızlı şarj özelliğine sahip Apple'ın popüler akıllı saatinin son versiyonudur.",
+                Price = 9998,
                 PictureUrl =
-                "https://www.apple.com/tr/shop/buy-watch/apple-watch/case-size-yap%C4%B1land%C4%B1rma#gallery-image-1",
-                Type = "Smartwatch",
+                    "https://www.apple.com/newsroom/images/product/watch/standard/Apple_watch-series7_hero_09142021_big.jpg.large.jpg",
+                Type = "Akıllı Saat",
                 Brand = "Apple",
                 QuantityInStock = 20
             },
@@ -203,11 +195,11 @@ public static class DbInitializer
             {
                 Name = "Logitech MX Master 3",
                 Description =
-                "The Logitech MX Master 3 is a high-end wireless mouse with a precision scroll wheel and customizable buttons.",
-                Price = 99,
+                    "Logitech MX Master 3, hassas kaydırma tekerleği ve özelleştirilebilir düğmeleri olan üst düzey bir kablosuz fare.",
+                Price = 2849,
                 PictureUrl =
-                "https://www.logitech.com/assets/65536/mx-master-3.png",
-                Type = "Computer Accessory",
+                    "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3s-business-wireless-mouse/gallery/mx-master-3s-for-business-gallery-1.png?v=1",
+                Type = "Bilgisayar Aksesuarı",
                 Brand = "Logitech",
                 QuantityInStock = 30
             },
@@ -215,11 +207,11 @@ public static class DbInitializer
             {
                 Name = "Canon EOS R5",
                 Description =
-                "The Canon EOS R5 is a professional-grade mirrorless camera with a 45-megapixel sensor and 8K video recording capabilities.",
-                Price = 3899,
+                    "Canon EOS R5, 45 megapiksel sensöre ve 8K video kaydetme özelliklerine sahip profesyonel sınıf bir aynasız fotoğraf makinesidir.",
+                Price = 99975,
                 PictureUrl =
-                " https://www.canon-europe.com/media/EOS_R5_01_tcm13-1875148_w2000.png",
-                Type = "Camera",
+                    "https://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_32c26ad194234d42b3cd9e582a21c99b",
+                Type = "Kamera",
                 Brand = "Canon",
                 QuantityInStock = 3
             },
@@ -227,11 +219,10 @@ public static class DbInitializer
             {
                 Name = "Microsoft Xbox Wireless Controller",
                 Description =
-                "The Microsoft Xbox Wireless Controller is the latest version of Microsoft's popular gaming controller, with improved ergonomics and reduced latency.",
-                Price = 59,
-                PictureUrl =
-                "https://compass.xbox.com/assets/23/0d/230d52da-bf11-497d-b5fc-faa41d379e25.jpg?n=Xbox-Series-X_Accessories_Hero_1920x1080.jpg",
-                Type = "Gaming Controller",
+                    "Microsoft Xbox Kablosuz Kumandası, geliştirilmiş ergonomi ve azaltılmış gecikme ile Microsoft'un popüler oyun kumandasının en son versiyonudur.",
+                Price = 2349,
+                PictureUrl = "https://m.media-amazon.com/images/I/51JCqvlkqVL.jpg",
+                Type = "Oyun Kumandası",
                 Brand = "Microsoft",
                 QuantityInStock = 15
             },
@@ -239,14 +230,12 @@ public static class DbInitializer
             {
                 Name = "Bose QuietComfort 35 II",
                 Description =
-                "The Bose QuietComfort 35 II is a high-end noise-cancelling headphone with built-in Amazon Alexa and Google Assistant.",
-                Price = 299,
-                PictureUrl =
-                "https://assets.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/global/products/headphones/qc35_ii_wireless_headphones/product_silo_images/qc35_ii_black_EC_hero.psd/_jcr_content/renditions/cq5dam.web.320.320.png",
-                Type = "Headphones",
+                    "Bose QuietComfort 35 II, entegre Amazon Alexa ve Google Assistant özelliklerine sahip yüksek kaliteli gürültü engelleme özelliğine sahip bir kulaküstü kulaklıktır.",
+                Price = 13390,
+                PictureUrl = "https://m.media-amazon.com/images/I/81+jNVOUsJL.jpg",
                 Brand = "Bose",
                 QuantityInStock = 10
-            },
+            }
         };
 
         context.Products.AddRange(products);

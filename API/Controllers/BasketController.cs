@@ -21,70 +21,93 @@ public class BasketController : BaseApiController
     {
         var basket = await RetrieveBasket(GetBuyerId());
 
-        if (basket == null) return NotFound();
+        if (basket == null)
+            return NotFound();
 
         return basket.MapBasketToDto();
     }
-
 
     [HttpPost]
     public async Task<ActionResult<BasketDto>> AddItemToBasket(int productId, int quantity)
     {
         var basket = await RetrieveBasket(GetBuyerId());
 
-        if (basket == null) basket = CreateBasket();
+        if (basket == null)
+            basket = CreateBasket();
         var product = await _context.Products.FindAsync(productId);
-        if (product == null) return BadRequest(new ProblemDetails { Title = "Product not found" });
+        if (product == null)
+            return BadRequest(new ProblemDetails { Title = "Product not found" });
         basket.AddItem(product, quantity);
+
+        product.QuantityInStock -= quantity;
+        _context.Products.Update(product);
+
+        if (product.QuantityInStock <= 0)
+        {
+            return BadRequest(new ProblemDetails { Title = "Product out of stock", });
+        }
 
         var result = await _context.SaveChangesAsync() > 0;
 
-        if (result) return CreatedAtRoute("GetBasket", basket.MapBasketToDto());
+        if (result)
+            return CreatedAtRoute("GetBasket", basket.MapBasketToDto());
 
         return BadRequest(new ProblemDetails { Title = "Problem adding item to basket" });
     }
-
 
     [HttpDelete]
     public async Task<ActionResult> RemoveBasketItem(int productId, int quantity)
     {
         var basket = await RetrieveBasket(GetBuyerId());
-        if (basket == null) return NotFound();
+        if (basket == null)
+            return NotFound();
         basket.RemoveItem(productId, quantity);
+
+        var product = await _context.Products.FindAsync(productId);
+        if (product == null)
+            return BadRequest(new ProblemDetails { Title = "Product not found" });
+
+        product.QuantityInStock += quantity;
+        _context.Products.Update(product);
 
         var result = await _context.SaveChangesAsync() > 0;
 
-        if (result) return Ok();
+        if (result)
+            return Ok();
 
         return BadRequest(new ProblemDetails { Title = "Problem removing item from the basket" });
     }
 
-
     private async Task<Basket> RetrieveBasket(string buyerId)
     {
-        if (string.IsNullOrEmpty(buyerId)) {
+        if (string.IsNullOrEmpty(buyerId))
+        {
             Response.Cookies.Delete("buyerId");
             return null;
         }
 
         return await _context.Baskets
-        .Include(i => i.Items)
-        .ThenInclude(p => p.Product)
-        .FirstOrDefaultAsync(x => x.BuyerId == buyerId);
-
+            .Include(i => i.Items)
+            .ThenInclude(p => p.Product)
+            .FirstOrDefaultAsync(x => x.BuyerId == buyerId);
     }
 
-    private string GetBuyerId() {
+    private string GetBuyerId()
+    {
         return User.Identity?.Name ?? Request.Cookies["buyerId"];
     }
-    
 
     private Basket CreateBasket()
     {
         var buyerId = User.Identity?.Name;
-        if (string.IsNullOrEmpty(buyerId)) {
+        if (string.IsNullOrEmpty(buyerId))
+        {
             buyerId = Guid.NewGuid().ToString();
-            var cookieOptions = new CookieOptions { IsEssential = true, Expires = DateTime.Now.AddDays(30) };
+            var cookieOptions = new CookieOptions
+            {
+                IsEssential = true,
+                Expires = DateTime.Now.AddDays(30)
+            };
             Response.Cookies.Append("buyerId", buyerId, cookieOptions);
         }
 
@@ -92,6 +115,4 @@ public class BasketController : BaseApiController
         _context.Baskets.Add(basket);
         return basket;
     }
-
-
 }
