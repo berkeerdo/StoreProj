@@ -88,19 +88,52 @@ public class AccountController : BaseApiController
         return new UserDto
         {
             Email = user.Email,
+            Username = user.UserName,
+            Password = user.PasswordHash,
             Token = await _tokenService.GenerateToken(user),
             Basket = userBasket?.MapBasketToDto()
         };
     }
-    
+
+    [Authorize]
+    [HttpPut("updateUser")]
+    public async Task<ActionResult<UserDto>> UpdateUser(UserDto userDto)
+    {
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+
+        user.Email = userDto.Email;
+        user.UserName = userDto.Username;
+
+        var result = await _userManager.UpdateAsync(user);
+
+        if (result.Succeeded)
+        {
+            var updatedUserBasket = await RetrieveBasket(userDto.Username);
+
+            return new UserDto
+            {
+                Email = user.Email,
+                Username = user.UserName
+            };
+        }
+        else
+        {
+            return BadRequest(result.Errors);
+        }
+    }
+
+
+
+
     [Authorize]
     [HttpGet("saveAddress")]
     public async Task<ActionResult<UserAddress>> GetSavedAddress()
     {
-       return await _userManager.Users
-       .Where(x => x.UserName == User.Identity.Name)
-       .Select(user => user.Address)
-       .FirstOrDefaultAsync();
+        return await _userManager.Users
+        .Where(x => x.UserName == User.Identity.Name)
+        .Select(user => user.Address)
+        .FirstOrDefaultAsync();
     }
 
     private async Task<Basket> RetrieveBasket(string buyerId)
